@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matrix Generator and Operations</title>
-    <link rel="stylesheet" href="/static/styles.css">
     <script>
-        // JavaScript to enable/disable scalar input based on operation choice
+        // function to enable/disable scalar input based on operation choice
         function toggleScalarInput() {
             const scalarInput = document.getElementById('scalar_value');
             const scalarLabel = document.getElementById('scalar_label');
@@ -26,73 +25,90 @@
     </script>
 </head>
 <body>
-    <h1>Matrix Generator and Operations</h1>
+    <!-- display the title-->
+    <h1 style="text-align: center;">Matrix Generator and Operations</h1>
     
-    <form action="/result" method="POST">
-        <!-- Inputs for Matrix 1 dimensions -->
-        <h2>Matrix 1</h2>
-        <label for="rows1">Rows (Matrix 1):</label>
-        <input type="number" id="rows1" name="rows1" required><br>
+    <!-- form container with inline CSS -->
+    <form action="/result" method="POST" style="text-align: center; margin-top: 20px;">
+        
+        <div style="display: flex; justify-content: center; gap: 50px; margin-bottom: 20px;">
+            <!-- inputs for matrix 1-->
+            <div>
+                <h2>Matrix 1</h2>
+                <label for="rows1" style="display: block; margin-bottom: 10px;">Rows (Matrix 1):</label>
+                <input type="number" id="rows1" name="rows1" required style="margin-bottom: 10px;"><br>
 
-        <label for="cols1">Columns (Matrix 1):</label>
-        <input type="number" id="cols1" name="cols1" required><br>
+                <label for="cols1" style="display: block; margin-bottom: 10px;">Columns (Matrix 1):</label>
+                <input type="number" id="cols1" name="cols1" required>
+            </div>
 
-        <!-- Inputs for Matrix 2 dimensions -->
-        <h2>Matrix 2</h2>
-        <label for="rows2">Rows (Matrix 2):</label>
-        <input type="number" id="rows2" name="rows2" required><br>
+            <!-- inputs for matrix 2-->
+            <div>
+                <h2>Matrix 2</h2>
+                <label for="rows2" style="display: block; margin-bottom: 10px;">Rows (Matrix 2):</label>
+                <input type="number" id="rows2" name="rows2" required style="margin-bottom: 10px;"><br>
 
-        <label for="cols2">Columns (Matrix 2):</label>
-        <input type="number" id="cols2" name="cols2" required><br>
-
-        <!-- Inputs for Random Integer Range for Matrix 1 -->
-        <h2>Matrix 1 Values</h2>
-        <label for="min_val1">Minimum Value for Matrix 1 Elements:</label>
-        <input type="number" id="min_val1" name="min_val1" required><br>
-
-        <label for="max_val1">Maximum Value for Matrix 1 Elements:</label>
-        <input type="number" id="max_val1" name="max_val1" required><br>
-
-        <!-- Inputs for Random Integer Range for Matrix 2 -->
-        <h2>Matrix 2 Values</h2>
-        <label for="min_val2">Minimum Value for Matrix 2 Elements:</label>
-        <input type="number" id="min_val2" name="min_val2" required><br>
-
-        <label for="max_val2">Maximum Value for Matrix 2 Elements:</label>
-        <input type="number" id="max_val2" name="max_val2" required><br>
-
-        <!-- Buttons for operations between matrices -->
-        <h2>Select Operation</h2>
-        <input type="radio" id="add" name="operation" value="add" onclick="toggleScalarInput()" required>
-        <label for="add">Add (+)</label><br>
-
-        <input type="radio" id="subtract" name="operation" value="subtract" onclick="toggleScalarInput()" required>
-        <label for="subtract">Subtract (-)</label><br>
-
-        <input type="radio" id="multiply" name="operation" value="multiply" onclick="toggleScalarInput()" required>
-        <label for="multiply">Multiply (*)</label><br>
-
-        <input type="radio" id="divide" name="operation" value="divide" onclick="toggleScalarInput()" required>
-        <label for="divide">Divide (/)</label><br>
-
-        <input type="radio" id="scalar" name="operation" value="scalar" onclick="toggleScalarInput()" required>
-        <label for="scalar">Scalar Multiplication</label><br>
-
-        <!-- Dropdown for selecting which matrix to multiply by scalar -->
-        <div id="matrix_choice" style="display:none;">
-            <label for="matrix_select">Select Matrix for Scalar:</label>
-            <select id="matrix_select" name="matrix_select">
-                <option value="matrix1">Matrix 1</option>
-                <option value="matrix2">Matrix 2</option>
-            </select>
+                <label for="cols2" style="display: block; margin-bottom: 10px;">Columns (Matrix 2):</label>
+                <input type="number" id="cols2" name="cols2" required>
+            </div>
         </div>
 
-        <!-- Input field for scalar value -->
-        <label id="scalar_label" for="scalar_value" style="display:none">Scalar Value:</label>
-        <input type="number" id="scalar_value" name="scalar_value" disabled><br>
+        <div style="display: flex; justify-content: center; gap: 50px; margin-bottom: 20px;">
+            <!-- matrix 1 values -->
+            <div>
+                <h2>Matrix 1 Values</h2>
+                <label for="min_val1" style="display: block; margin-bottom: 10px;">Minimum Value:</label>
+                <input type="number" id="min_val1" name="min_val1" required style="margin-bottom: 10px;"><br>
 
-        <!-- Submit button -->
-        <input type="submit" value="Generate Matrices and Perform Operation">
+                <label for="max_val1" style="display: block; margin-bottom: 10px;">Maximum Value:</label>
+                <input type="number" id="max_val1" name="max_val1" required>
+            </div>
+
+            <!-- matrix 2 values -->
+            <div>
+                <h2>Matrix 2 Values</h2>
+                <label for="min_val2" style="display: block; margin-bottom: 10px;">Minimum Value:</label>
+                <input type="number" id="min_val2" name="min_val2" required style="margin-bottom: 10px;"><br>
+
+                <label for="max_val2" style="display: block; margin-bottom: 10px;">Maximum Value:</label>
+                <input type="number" id="max_val2" name="max_val2" required>
+            </div>
+        </div>
+
+        <!-- operation selection and submit button-->
+        <div style="margin-top: 20px;">
+            <h2>Select Operation</h2>
+            <input type="radio" id="add" name="operation" value="add" onclick="toggleScalarInput()" required>
+            <label for="add">Add (+)</label><br>
+
+            <input type="radio" id="subtract" name="operation" value="subtract" onclick="toggleScalarInput()" required>
+            <label for="subtract">Subtract (-)</label><br>
+
+            <input type="radio" id="multiply" name="operation" value="multiply" onclick="toggleScalarInput()" required>
+            <label for="multiply">Multiply (*)</label><br>
+
+            <input type="radio" id="divide" name="operation" value="divide" onclick="toggleScalarInput()" required>
+            <label for="divide">Divide (/)</label><br>
+
+            <input type="radio" id="scalar" name="operation" value="scalar" onclick="toggleScalarInput()" required>
+            <label for="scalar">Scalar Multiplication</label><br>
+
+            <!--scalar multiplication options -->
+            <div id="matrix_choice" style="display:none; margin-top: 10px;">
+                <label for="matrix_select">Select Matrix for Scalar:</label>
+                <select id="matrix_select" name="matrix_select">
+                    <option value="matrix1">Matrix 1</option>
+                    <option value="matrix2">Matrix 2</option>
+                </select>
+            </div>
+
+            <!--scalar value input -->
+            <label id="scalar_label" for="scalar_value" style="display:none; margin-top: 10px;">Scalar Value:</label>
+            <input type="number" id="scalar_value" name="scalar_value" disabled><br><br>
+
+            <!--submit button -->
+            <input type="submit" value="Generate Matrices and Perform Operation">
+        </div>
     </form>
 </body>
 </html>

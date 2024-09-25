@@ -3,7 +3,7 @@ import numpy as np
 
 app = Flask(__name__)
 
-# Helper function to generate a random matrix
+# function to generate a random matrix using numpy library
 def create_matrix(rows, cols, min_val, max_val):
     return np.random.randint(min_val, max_val + 1, (rows, cols))
 
@@ -31,7 +31,7 @@ def result():
         # Get the selected operation
         operation = request.form['operation']
 
-        # Generate two random matrices using NumPy
+        # Generate two random matrices 
         matrix1 = create_matrix(rows1, cols1, min_val1, max_val1)
         matrix2 = create_matrix(rows2, cols2, min_val2, max_val2)
 
@@ -74,7 +74,7 @@ def result():
                                operation=operation)
 
     except Exception as e:
-        # Handle any errors (such as invalid input) and display an error page
+        # Handle any errors and display an error page
         return render_template('error.html', error=str(e))
 
 # Run the app
